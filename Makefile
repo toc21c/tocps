@@ -2,7 +2,7 @@ TESTS = test \
 
 OBJS = test.o \
 	   net.o \
-       sock.o \
+	   loopback.o \
 
 CFLAGS := $(CFLAGS) -g -W -Wall -Wno-unused-parameter -iquote .
 
