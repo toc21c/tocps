@@ -59,3 +59,10 @@ netdev_start_xmit(struct net_device *dev)
         return -1;
     return dev->ops->ndo_xmit(dev);
 }
+
+int
+netif_rx(struct net_device *dev)
+{
+    fprintf(stderr, "%s: device=%s\n", __func__, dev->name);
+    return 0;
+}

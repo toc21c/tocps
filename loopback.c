@@ -6,7 +6,8 @@
 static int
 loopback_xmit(struct net_device *dev)
 {
-    /* TODO: netif_rx() */
+    /* TODO: sk_buff */
+    netif_rx(dev);
     return 0;
 }
 

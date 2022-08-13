@@ -25,5 +25,7 @@ extern void
 free_netdev(struct net_device *dev);
 extern int
 netdev_start_xmit(struct net_device *dev);
+extern int
+netif_rx(struct net_device *dev);
 
 #endif // NET_H_
