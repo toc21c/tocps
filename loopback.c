@@ -4,10 +4,10 @@
 #include "loopback.h"
 
 static int
-loopback_xmit(struct net_device *dev)
+loopback_xmit(struct net_device *dev, struct sk_buff *skb)
 {
-    /* TODO: sk_buff */
-    netif_rx(dev);
+    fprintf(stderr, "%s: device=%s, type=0x%04x\n", __func__, dev->name, skb->proto);
+    netif_rx(dev, skb);
     return 0;
 }
 

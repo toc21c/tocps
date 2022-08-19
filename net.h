@@ -1,6 +1,8 @@
 #ifndef NET_H_
 #define NET_H_
 
+#include "skbuff.h"
+
 #define IFNAMSIZ 16
 
 struct net_device {
@@ -11,8 +13,7 @@ struct net_device {
 };
 
 struct net_device_ops {
-    /* TODO: sk_buff */
-    int (*ndo_xmit)(struct net_device *dev);
+    int (*ndo_xmit)(struct net_device *dev, struct sk_buff *skb);
 };
 
 extern struct net_device *
@@ -24,8 +25,10 @@ unregister_netdev(struct net_device *dev);
 extern void
 free_netdev(struct net_device *dev);
 extern int
-netdev_start_xmit(struct net_device *dev);
+netdev_start_xmit(struct net_device *dev, struct sk_buff *skb);
 extern int
-netif_rx(struct net_device *dev);
+netif_rx(struct net_device *dev, struct sk_buff *skb);
+extern int
+net_stack_init(void);
 
 #endif // NET_H_

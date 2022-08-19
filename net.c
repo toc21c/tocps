@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "if_ether.h"
 #include "net.h"
 
 static struct net_device *dev_base;
@@ -53,16 +54,22 @@ free_netdev(struct net_device *dev)
 }
 
 int
-netdev_start_xmit(struct net_device *dev)
+netdev_start_xmit(struct net_device *dev, struct sk_buff *skb)
 {
     if (!dev->ops->ndo_xmit)
         return -1;
-    return dev->ops->ndo_xmit(dev);
+    return dev->ops->ndo_xmit(dev, skb);
 }
 
 int
-netif_rx(struct net_device *dev)
+netif_rx(struct net_device *dev, struct sk_buff *skb)
 {
-    fprintf(stderr, "%s: device=%s\n", __func__, dev->name);
+    fprintf(stderr, "%s: device=%s, type=0x%04x\n", __func__, dev->name, skb->proto);
+    return 0;
+}
+
+int
+net_stack_init(void)
+{
     return 0;
 }
